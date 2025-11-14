@@ -1,47 +1,77 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Music Marce</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Music Marce — Player</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-
   <header>
-    <div class="logo-box">
-      <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png" class="logo">
+    <!-- Logo animado SVG -->
+    <div class="logo-wrap" aria-hidden="true">
+      <svg class="logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g" x1="0" x2="1">
+            <stop offset="0" stop-color="#7b2ff7"/>
+            <stop offset="1" stop-color="#00eaff"/>
+          </linearGradient>
+          <filter id="f" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <circle cx="100" cy="100" r="60" fill="url(#g)" filter="url(#f)" opacity="0.22"/>
+        <g transform="translate(60,55)">
+          <rect x="0" y="0" width="80" height="90" rx="12" fill="none" stroke="url(#g)" stroke-width="4"/>
+          <circle cx="18" cy="30" r="8" fill="url(#g)"/>
+          <path d="M25 18 L55 45 L25 72 Z" fill="url(#g)"/>
+        </g>
+      </svg>
     </div>
 
-    <h1>🎶 Music Marce 🎶</h1>
-    <p>Disfruta mis canciones favoritas — vibra con cada emoción 💜</p>
+    <div class="title">
+      <h1>Music Marce</h1>
+      <p class="subtitle">Tu reproductor — neón morado y azul</p>
+    </div>
   </header>
 
-  <!-- CONTENEDOR PRINCIPAL -->
-  <main class="player-layout">
+  <main class="container">
+    <section class="player-area">
+      <div class="player-card">
+        <div id="player" class="youtube-player" aria-label="Reproductor principal"></div>
 
-    <!-- REPRODUCTOR PRINCIPAL -->
-    <div class="main-player">
-      <iframe id="mainVideo"
-        src="https://www.youtube.com/embed/pdHfmklCxbE"
-        allowfullscreen>
-      </iframe>
+        <div id="player-info" class="player-info">
+          <h2 id="current-title">Cargando...</h2>
+          <div class="player-controls">
+            <button id="btn-open-youtube" class="btn">Abrir en YouTube</button>
+            <span id="error-msg" class="error-msg" hidden>Este video no se puede reproducir aquí.</span>
+          </div>
+        </div>
+      </div>
 
-      <h2 id="mainTitle">Beele - Quédate</h2>
-    </div>
+      <div class="gallery-preview" id="gallery-preview">
+        <!-- miniaturas generadas por JS -->
+      </div>
+    </section>
 
-    <!-- LISTA DE CANCIONES -->
-    <aside class="song-list" id="songList">
-      <!-- JS insertará la lista -->
+    <aside class="playlist">
+      <h3>Lista de canciones</h3>
+      <ul id="playlist"></ul>
     </aside>
-
   </main>
 
+  <section class="full-gallery" id="full-gallery">
+    <h3>Galería</h3>
+    <div class="gallery-grid" id="gallery-grid"></div>
+  </section>
+
   <footer>
-    <p>🎵 Hecho con amor por Marce 💜</p>
+    <p>🎵 Hecho con 💜 por Marce</p>
   </footer>
 
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script src="script.js"></script>
 </body>
 </html>
